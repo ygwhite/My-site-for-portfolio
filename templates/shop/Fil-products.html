@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>Home</title>
+</head>
+<body>
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
+                    <li><a href="{% url 'shop' %}" class="nav-link px-2 text-white">Shop</a></li>
+                    <li><a href="{% url 'cart_view' %}" class="nav-link px-2 text-white">Cart</a></li>
+            </ul>
+
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Search..."
+                       aria-label="Search">
+            </form>
+
+            <div class="text-end">
+                {% if user.is_authenticated %}
+                <a type="button" class="btn btn-outline-light" href="{% url 'logout' %}">
+                    log-out
+                </a>
+                <a type="button" class="btn btn-light me-2" href="/">
+                    {{ user.username }}
+                </a>
+                {% else %}
+                <a type="button" class="btn btn-light me-2" href="{% url 'registration' %}">
+                    Sign-Up
+                </a>
+                <a type="button" class="btn btn-warning" href="{% url 'login' %}">
+                    Login
+                </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</header>
+<div class="container">
+    <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
+        <h1 class="display-4 fw-normal">Обновление товаров</h1>
+        <p class="fs-5 text-muted">Тут ты можешь обновить свои товары!</p>
+    </div>
+    <div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+        <div class="col">
+            <div class="card mb-4 rounded-3 shadow-sm border-primary">
+                <div class="card-header py-3 text-bg-primary border-primary">
+                    <h4 class="my-0 fw-normal">Новые товары</h4>
+                </div>
+                <form method="post" action="{% url 'fill_database' %}">
+                    {% csrf_token %}
+                     <div class="card-body">
+                    <h1 class="card-title pricing-card-title">Не переживай, я ничего не пропущу!<small
+                            class="text-muted fw-light"></small></h1>
+                    <button class="learn-more-btn" name="fill_database" type="submit" onclick="runSpinner()">
+                        <span class="spinner spinner-border spinner-border-sm" role="status" id="spinner"
+                              style="visibility: hidden"></span>
+                        Обновить?
+                    </button>
+                </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

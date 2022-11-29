@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <title>login</title>
+</head>
+<body>
+<form method="post" action="{% url 'login' %}">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Log-in</h1>
+    <div class="container-md">
+        <!--            {{ login_form }}-->
+        <div class="quote-form-wrapper">
+            <input type="text" class="form-control" placeholder="Login" id="id_username" name="username" required>
+            <label class="form-label" for="id_username"></label>
+        </div>
+        <div class="quote-form-wrapper">
+            <input type="password" class="form-control" placeholder="Password" id="id_password" name="password"
+                   required>
+            <label class="form-label" for="id_username"></label>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-4 col-md-4 offset-md-5">
+                <p2 class="h3 mb-3 fw-normal">{{ attention }}</p2>
+            </div>
+        </div>
+        {% for error in login_form.non_field_errors %}
+        <div class="row">
+            <div class="col-12 col-lg-4 col-md-4 offset-md-5">
+                <p2 class="h3 mb-3 fw-normal">{{ error }}</p2>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+
+        <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">© 2017–2022</p>
+    </div>
+</form>
+</div>
+</body>
+</html>
