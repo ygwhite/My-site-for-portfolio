@@ -50,7 +50,7 @@
     </div>
     <div class="row justify-items">
         {% for product in object_list %}
-        <div class="card text-bg-light mb-3" style="max-width: 18rem;">
+        <div class="card text-bg-light mb-3" style="max-width: 18rem; border: none;">
             <div class="card-header">Кроссовки</div>
             <div class="card-body">
                 <form method="post" action="{% url 'add_item_to_cart' product.pk %}">
