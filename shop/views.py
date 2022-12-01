@@ -38,7 +38,6 @@ def add_item_to_cart(request, pk):
                 cart = Order.get_cart(request.user)
                 # product = Product.objects.get(pk=pk)
                 product = get_object_or_404(Product, pk=pk)
-                print('хуй')
                 cart.orderitem_set.create(product=product,
                                           quantity=quantity,
                                           price=product.price,
@@ -79,5 +78,4 @@ def make_order(request):
     cart = Order.get_cart(request.user)
     cart.make_order()
     return redirect('shop')
-
 
