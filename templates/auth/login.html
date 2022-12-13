@@ -6,10 +6,10 @@
     <title>login</title>
 </head>
 <body>
-<form method="post" action="{% url 'login' %}">
-    {% csrf_token %}
-    <h1 class="h3 mb-3 fw-normal">Log-in</h1>
-    <div class="container-md">
+<div class="container-md">
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        <h1 class="h3 mb-3 fw-normal">Log-in</h1>
         <!--            {{ login_form }}-->
         <div class="quote-form-wrapper">
             <input type="text" class="form-control" placeholder="Login" id="id_username" name="username" required>
@@ -42,8 +42,7 @@
         </div>
 
         <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-    </div>
-</form>
+    </form>
 </div>
 </body>
 </html>
