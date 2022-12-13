@@ -9,7 +9,6 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.104.2">
-    <title>Your cart · Bootstrap v5.2</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.2/examples/album/">
 
@@ -80,19 +79,6 @@
       }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     </style>
 
 
@@ -116,7 +102,6 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                 <li><a href="{% url 'shop' %}" class="nav-link px-2 text-white">Shop</a></li>
                 {% if user.is_staff %}
                 <li><a href="{% url 'fill_database' %}" class="nav-link px-2 text-white">Update Products</a></li>
@@ -126,46 +111,48 @@
         </div>
     </div>
 </header>
-{% for item in items %}
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">Товар</th>
-        <th scope="col">Имя</th>
-        <th scope="col">Количество</th>
-        <th scope="col">Цена</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <th scope="row">#{{ item.id }}</th>
-        <td>{{ item.product }}</td>
-        <td>{{ item.quantity }}</td>
-        <td>{{ item.amount }}</td>
-        <td>
-            <div class="col-12 col-md-1 item">
-                <form method="post" action="{% url 'cart_delete_item' item.pk %}">
-                    {% csrf_token %}
-                    <button type="submit" class="btn btn-danger"><u>Удалить товар</u></button>
-                </form>
-            </div>
-        </td>
-    </tr>
-    <!--    <tr>-->
-    <!--        <th scope="row">2</th>-->
-    <!--        <td>Jacob</td>-->
-    <!--        <td>Thornton</td>-->
-    <!--        <td>@fat</td>-->
-    <!--    </tr>-->
-    <!--    <tr>-->
-    <!--        <th scope="row">3</th>-->
-    <!--        <td colspan="2">Larry the Bird</td>-->
-    <!--        <td>@twitter</td>-->
-    <!--    </tr>-->
-    </tbody>
-</table>
-</table>
-{% endfor %}
-<a type="button" class="btn btn-primary" href="{% url 'make_order' %}">Оплатить сумму заказа: {{cart.amount }}</a>
+<div class="container">
+    <table class="table borderless">
+        <thead>
+        <tr>
+            <th scope="col">Товар</th>
+            <th scope="col">Имя</th>
+            <th scope="col">Количество</th>
+            <th scope="col">Цена</th>
+            <th></th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+        <tr>
+            <th scope="row">#{{ item.id }}</th>
+            <td>{{ item.product }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.amount }}</td>
+            <td>
+                <div class="col-12 col-md-1 item">
+                    <form method="post" action="{% url 'cart_delete_item' item.pk %}">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger"><u>Удалить товар</u></button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+        <!--    <tr>-->
+        <!--        <th scope="row">2</th>-->
+        <!--        <td>Jacob</td>-->
+        <!--        <td>Thornton</td>-->
+        <!--        <td>@fat</td>-->
+        <!--    </tr>-->
+        <!--    <tr>-->
+        <!--        <th scope="row">3</th>-->
+        <!--        <td colspan="2">Larry the Bird</td>-->
+        <!--        <td>@twitter</td>-->
+        <!--    </tr>-->
+        </tbody>
+    </table>
+    <a type="button" class="btn btn-primary" href="{% url 'make_order' %}">Оплатить сумму заказа: {{cart.amount }}</a>
+</div>
 </body>
 </html>

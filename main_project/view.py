@@ -1,5 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 
 def index(requests):
-    return render(requests, 'shop/index.html')
+    return redirect('shop')
